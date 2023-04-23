@@ -128,7 +128,7 @@ controller.player4.onEvent(ControllerEvent.Connected, function () {
     true
     )
     controller.player4.moveSprite(mySprite4)
-    statusbar4 = statusbars.create(100, 4, StatusBarKind.Energy)
+    statusbar4 = statusbars.create(100, 4, StatusBarKind.EnemyHealth)
     statusbar4.attachToSprite(mySprite4)
     statusbar4.value = 0
     mp.moveWithButtons(mp.playerSelector(mp.PlayerNumber.Four))
@@ -138,6 +138,10 @@ controller.player2.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Press
 })
 controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
     statusbar.value += 0.05
+})
+statusbars.onStatusReached(StatusBarKind.Energy, statusbars.StatusComparison.GT, statusbars.ComparisonType.Percentage, 100, function (status) {
+    game.setGameOverMessage(true, "P3 Wins")
+    game.gameOver(true)
 })
 controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
     statusbar2.value += 0.05
@@ -330,6 +334,10 @@ controller.player2.onEvent(ControllerEvent.Connected, function () {
 })
 controller.player1.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
     statusbar.value += 0.05
+})
+statusbars.onStatusReached(StatusBarKind.EnemyHealth, statusbars.StatusComparison.GT, statusbars.ComparisonType.Percentage, 100, function (status) {
+    game.setGameOverMessage(true, "P4 wins")
+    game.gameOver(true)
 })
 controller.player1.onEvent(ControllerEvent.Connected, function () {
     mySprite = mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.One))
