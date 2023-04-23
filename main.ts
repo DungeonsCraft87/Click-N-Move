@@ -1,3 +1,6 @@
+controller.player4.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
 controller.player4.onEvent(ControllerEvent.Connected, function () {
     mySprite4 = sprites.create(assets.image`myImage1`, SpriteKind.Player)
     mySprite4 = mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Four))
@@ -149,6 +152,9 @@ controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Press
 controller.player2.onButtonEvent(ControllerButton.Down, ControllerButtonEvent.Pressed, function () {
     statusbar.value += 0.05
 })
+controller.player4.onButtonEvent(ControllerButton.Down, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
 controller.player3.onEvent(ControllerEvent.Connected, function () {
     mySprite3 = sprites.create(assets.image`myImage1`, SpriteKind.Player)
     mySprite3 = mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Three))
@@ -284,6 +290,9 @@ controller.player3.onEvent(ControllerEvent.Connected, function () {
     statusbar3.value = 0
     mp.moveWithButtons(mp.playerSelector(mp.PlayerNumber.Three))
 })
+controller.player3.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
 controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
     statusbar.value += 0.05
 })
@@ -293,10 +302,16 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
 controller.player2.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
     statusbar.value += 0.05
 })
+controller.player3.onButtonEvent(ControllerButton.Down, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
 controller.player1.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
     statusbar.value += 0.05
 })
 controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
+controller.player4.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
     statusbar.value += 0.05
 })
 controller.player2.onEvent(ControllerEvent.Connected, function () {
@@ -457,9 +472,18 @@ controller.player1.onEvent(ControllerEvent.Connected, function () {
     statusbar.attachToSprite(mySprite)
     mp.moveWithButtons(mp.playerSelector(mp.PlayerNumber.One))
 })
+controller.player4.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
+controller.player3.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
 statusbars.onStatusReached(StatusBarKind.Magic, statusbars.StatusComparison.GT, statusbars.ComparisonType.Percentage, 100, function (status) {
     game.setGameOverMessage(true, "P2 Wins")
     game.gameOver(true)
+})
+controller.player3.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
 })
 statusbars.onStatusReached(StatusBarKind.Health, statusbars.StatusComparison.GT, statusbars.ComparisonType.Percentage, 100, function (status) {
     game.setGameOverMessage(true, "P1 Wins")
@@ -475,10 +499,10 @@ let mySprite: Sprite = null
 let mySprite2: Sprite = null
 let statusbar3: StatusBarSprite = null
 let mySprite3: Sprite = null
-let statusbar: StatusBarSprite = null
 let statusbar2: StatusBarSprite = null
 let statusbar4: StatusBarSprite = null
 let mySprite4: Sprite = null
+let statusbar: StatusBarSprite = null
 music.play(music.createSong(hex`0078000408040105001c000f0a006400f4010a00000400000000000000000000000000000000028a0000000400012708000c00012010001400012918001c0001271c002000012920002400012a24002800012928002c00012a2c003000012930003400012738003c0001273c004000012940004400012a44004800012948004c00012a4c005000012950005400012758005c00012560006400012768006c00012970007400012478007c0001257c0080000122`), music.PlaybackMode.UntilDone)
 scene.setBackgroundImage(img`
     fffffffcbccffffffffffcfbddddddddddd111111111111111111111111dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbffcddffffffcfcfffff
