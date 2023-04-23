@@ -1,14 +1,46 @@
 controller.player2.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
-    statusbar2.value += 0.9
+    statusbar2.value += 0.05
+})
+controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
 })
 controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
-    statusbar2.value += 0.9
+    statusbar2.value += 0.05
+})
+controller.player2.onButtonEvent(ControllerButton.Down, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
+controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
+controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
+controller.player2.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
+controller.player1.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
 })
 controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
-    statusbar.value += 0.9
+    statusbar.value += 0.05
+})
+controller.player2.onEvent(ControllerEvent.Connected, function () {
+    controller.player2.moveSprite(mySprite2)
+    statusbar2 = statusbars.create(100, 4, StatusBarKind.Magic)
+    statusbar2.attachToSprite(mySprite2)
+    statusbar2.value = 0
+    mp.moveWithButtons(mp.playerSelector(mp.PlayerNumber.Two))
 })
 controller.player1.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
-    statusbar.value += 0.9
+    statusbar.value += 0.05
+})
+controller.player1.onEvent(ControllerEvent.Connected, function () {
+    controller.player1.moveSprite(mySprite)
+    statusbar = statusbars.create(100, 4, StatusBarKind.Health)
+    statusbar.value = 0
+    statusbar.attachToSprite(mySprite)
+    mp.moveWithButtons(mp.playerSelector(mp.PlayerNumber.One))
 })
 statusbars.onStatusReached(StatusBarKind.Magic, statusbars.StatusComparison.GT, statusbars.ComparisonType.Percentage, 100, function (status) {
     game.setGameOverMessage(true, "P2 Wins")
@@ -18,10 +50,18 @@ statusbars.onStatusReached(StatusBarKind.Health, statusbars.StatusComparison.GT,
     game.setGameOverMessage(true, "P1 Wins")
     game.gameOver(true)
 })
-let statusbar2: StatusBarSprite = null
+controller.player1.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
+controller.player1.onButtonEvent(ControllerButton.Down, ControllerButtonEvent.Pressed, function () {
+    statusbar.value += 0.05
+})
 let statusbar: StatusBarSprite = null
-let mySprite2 = mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Two))
-let mySprite = mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.One))
+let statusbar2: StatusBarSprite = null
+let mySprite: Sprite = null
+let mySprite2: Sprite = null
+mySprite2 = mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Two))
+mySprite = mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.One))
 mySprite2 = sprites.create(assets.image`myImage1`, SpriteKind.Player)
 mySprite = sprites.create(img`
     . . f f f . . . . . . . . f f f 
@@ -279,14 +319,4 @@ scene.setBackgroundImage(img`
     fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbffffbffffdfffcddcfffffffffffffffff
     fffffffffffffffffffffffffffffffffbffffffbffffffffffffffffffffffbfcffffcfffffffffffffffcffffffffffffffffffffffffffffffffffffffffffffffffffffdddffffffffffccffffff
     `)
-music.play(music.stringPlayable("E B A - C5 - F E ", 206), music.PlaybackMode.UntilDone)
-mp.moveWithButtons(mp.playerSelector(mp.PlayerNumber.One))
-mp.moveWithButtons(mp.playerSelector(mp.PlayerNumber.Two))
-controller.player2.moveSprite(mySprite2)
-controller.player1.moveSprite(mySprite)
-statusbar = statusbars.create(100, 4, StatusBarKind.Health)
-statusbar2 = statusbars.create(100, 4, StatusBarKind.Magic)
-statusbar.value = 0
-statusbar2.value = 0
-statusbar.attachToSprite(mySprite)
-statusbar2.attachToSprite(mySprite2)
+music.play(music.createSong(hex`0078000408040105001c000f0a006400f4010a00000400000000000000000000000000000000028a0000000400012708000c00012010001400012918001c0001271c002000012920002400012a24002800012928002c00012a2c003000012930003400012738003c0001273c004000012940004400012a44004800012948004c00012a4c005000012950005400012758005c00012560006400012768006c00012970007400012478007c0001257c0080000122`), music.PlaybackMode.UntilDone)
